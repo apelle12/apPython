@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Aug 29 18:26:36 2019
+
+@author: angelapelle
+"""
+"""
+Create Bingo Board
+**********************************************************
+from docx import Document
+from copy import deepcopy
+import pandas as pd
+import os
+import random
+
+
+# Open document template
+filePath = os.getcwd()
+document = Document(filePath + '/Tech Bingo.docx')
+
+fileNameData = filePath + '/Bingo Bank.xlsx' #This changes
+data = pd.read_excel(fileNameData)
+
+for k in range(35):
+    x = random.sample(range(0,len(data['Tech Bingo Words'])),25)
+    xpos = 0
+    for i in range(5):
+        for j in range(5):
+            document.tables[k].rows[i].cells[j].paragraphs[0].clear()
+            document.tables[k].rows[i].cells[j].paragraphs[0].text = data['Tech Bingo Words'][x[xpos]]
+            xpos+=1
+            #print(xpos)
+                
+    # Copies template to end of the document
+    template = document.tables[k]
+    tbl = template._tbl
+    new_tbl = deepcopy(tbl)
+    paragraph = document.add_paragraph()
+    paragraph._p.addnext(new_tbl)
+    document.save('Master_TechBingo.docx')
+    
+ ********************************************************
+ """
+ #Play Bingo
+ 
+import os
+from PIL import Image
+import random
+import glob
+# Quit = 'n'
+#Play = 'y'
+
+filePath = os.getcwd() + '/Tech Bingo Pics/'
+filesInPath = glob.glob(filePath+'/*.jpeg')
+x = random.sample(range(0,len(filesInPath)),len(filesInPath))
+
+keyPress = 'y'
+count = 0
+
+while keyPress !='n':
+    img = Image.open(filesInPath[x[count]])
+    img.show()
+    count += 1
+    keyPress = input('Keep on playing?: ')
+
+    
+    
+  
+     
+     
+
